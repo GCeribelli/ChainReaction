@@ -51,7 +51,7 @@ public class MovingBalls extends Ball {
         return speedY;
     }
 
-    public void move(String direction) {
+    public void move() {
         setX(getX() + getXSpeed());
         setY(getY() + getYSpeed());
     }

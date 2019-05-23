@@ -70,7 +70,7 @@ public abstract class Ball implements MovingObject {
         return r;  //finish this method
     }
 
-    public abstract void move(String direction);
+    public abstract void move();
 
     public abstract void draw(Graphics window);
 

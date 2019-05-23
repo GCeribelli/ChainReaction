@@ -23,6 +23,7 @@ public class Playable {
     public Playable(int size) {
         int rX = 0;
         int rY = 0;
+        eBalls = new ArrayList<ExpandedBall>();
         balls = new ArrayList<MovingBalls>();
         for (int i = 0; i < size; i++) {
             rX = (int) (Math.random() * 790);
@@ -56,10 +57,9 @@ public class Playable {
         }
     }
     public void removeDeadOnes(ExpandedBall b) {
-        eBalls = new ArrayList<ExpandedBall>();
             for(int i = 0; i < balls.size(); i++){
                 if((b.getY() <= balls.get(i).getY() + balls.get(i).getRadius()) && (b.getY() >= balls.get(i).getY()) && (b.getX() <= balls.get(i).getX() + balls.get(i).getRadius()) && (b.getX() >= balls.get(i).getX())){
-                    eBalls.add(balls.get(i));
+                    eBalls.add(new ExpandedBall(balls.get(i).getX(),balls.get(i).getY(),balls.get(i).getRadius(), 20));
                     balls.remove(i);
                 }
         }
