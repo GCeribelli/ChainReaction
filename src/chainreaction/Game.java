@@ -41,7 +41,7 @@ public class Game extends Canvas implements MouseListener, Runnable {
         Label l;
         addMouseListener(this);
         for(int i = 0; i < 40; i++)
-            balls.add(new MovingBalls());
+            balls.add(new MovingBalls(300, 300, 50, 50, 2));
         setSize(800, 600);
         setVisible(true);
         new Thread(this).start();
@@ -49,6 +49,16 @@ public class Game extends Canvas implements MouseListener, Runnable {
 
     public void update(Graphics window) {
         paint(window);
+    }
+    public void moveEm(){
+        System.out.println(1);
+        for(MovingBalls i : balls)
+            System.out.println(i.toString());
+        for(MovingBalls i : balls)
+            i.move();
+        System.out.println(2);
+        for(MovingBalls i : balls)
+            System.out.println(i.toString());
     }
 
     public void paint(Graphics window) {

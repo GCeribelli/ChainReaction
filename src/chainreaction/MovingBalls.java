@@ -61,7 +61,7 @@ public class MovingBalls extends Ball {
     }
 
     public String toString() {
-        return "";
+        return "x: " + getX() + " y: " + getY() ;
     }
 
 }
