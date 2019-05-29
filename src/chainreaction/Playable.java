@@ -56,11 +56,11 @@ public class Playable {
             }
         }
     }
-    public void removeDeadOnes(ExpandedBall b) {
-            for(int i = 0; i < balls.size(); i++){
-                if((b.getY() <= balls.get(i).getY() + balls.get(i).getRadius()) && (b.getY() >= balls.get(i).getY()) && (b.getX() <= balls.get(i).getX() + balls.get(i).getRadius()) && (b.getX() >= balls.get(i).getX())){
-                    eBalls.add(new ExpandedBall(balls.get(i).getX(),balls.get(i).getY(),balls.get(i).getRadius(), 20));
-                    balls.remove(i);
+    public void expand(ExpandedBall b, int time) {
+        for(int a = 0; a < balls.size(); a++){
+                if((balls.get(a).getY() <= b.getY() + b.getRadius()) && (balls.get(a).getY() >= b.getY()) && (balls.get(a).getX() <= b.getX() + b.getRadius()) && (balls.get(a).getX() >= b.getX())){
+                    eBalls.add(new ExpandedBall(balls.get(a).getX(),balls.get(a).getY(),15,60, time));
+                    balls.remove(a);
                 }
         }
     }

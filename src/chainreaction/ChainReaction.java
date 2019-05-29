@@ -19,7 +19,7 @@ public class ChainReaction extends JFrame{
 
 	public ChainReaction()
 	{
-		super("STARFIGHTER");
+		super("Chain Reaction");
 		setSize(WIDTH,HEIGHT);
 
 		Game game = new Game();

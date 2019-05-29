@@ -5,8 +5,8 @@
  */
 package chainreaction;
 
-import java.awt.Graphics;
 import java.awt.Color;
+import java.awt.Graphics;
 
 /**
  *
@@ -52,11 +52,12 @@ public class MovingBalls extends Ball {
     }
 
     public void move() {
-        setX(getX() + getXSpeed());
-        setY(getY() + getYSpeed());
+        setX(getX() + speedX);
+        setY(getY() + speedY);
     }
 
     public void draw(Graphics window) {
+        window.setColor(Color.RED);
         window.fillOval(getX(), getY(), getRadius(), getRadius());
     }
 

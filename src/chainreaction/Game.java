@@ -30,19 +30,22 @@ public class Game extends Canvas implements MouseListener, Runnable {
 
     private int timer;
     private JLabel[] game;
-    private boolean[] keys;
     private BufferedImage back;
     private ExpandedBall user;
-    private ArrayList<MovingBalls> balls;
-
+    private ArrayList<ExpandedBall> expanded;
+    private GameBalls balls;
+    private MovingBalls b;
 
     public Game() {
-        balls = new ArrayList<MovingBalls>();
         Label l;
+        timer = 0;
+        expanded = new ArrayList<ExpandedBall>();
+//        expanded.add(new ExpandedBall(0,0,0,0,0));
+        b = new MovingBalls(300, 300, 15, 1, 1);
         addMouseListener(this);
-        for(int i = 0; i < 40; i++)
-            balls.add(new MovingBalls(300, 300, 50, 50, 2));
         setSize(800, 600);
+        balls = new GameBalls(40);
+        user = new ExpandedBall(0,0,0,0,timer);
         setVisible(true);
         new Thread(this).start();
     }
@@ -50,39 +53,42 @@ public class Game extends Canvas implements MouseListener, Runnable {
     public void update(Graphics window) {
         paint(window);
     }
-    public void moveEm(){
-        System.out.println(1);
-        for(MovingBalls i : balls)
-            System.out.println(i.toString());
-        for(MovingBalls i : balls)
-            i.move();
-        System.out.println(2);
-        for(MovingBalls i : balls)
-            System.out.println(i.toString());
-    }
 
     public void paint(Graphics window) {
         Graphics2D twoDGraph = (Graphics2D) window;
         if (back == null) {
             back = (BufferedImage) (createImage(getWidth(), getHeight()));
         }
-        for(MovingBalls i : balls)
-            i.move();
-        for(MovingBalls i : balls)
-            System.out.println(i.toString());
-
-
         Graphics graphToBack = back.createGraphics();
-        graphToBack.setColor(Color.GRAY);
+        graphToBack.setColor(Color.WHITE);
         graphToBack.fillRect(0, 0, 800, 600);
         graphToBack.setColor(Color.BLUE);
         graphToBack.drawString("Chain Reaction ", 25, 50);
+        //twoDGraph.drawImage(back, null, 0, 0);
+        
+        b.draw(graphToBack);
+        balls.drawEm(graphToBack);
+        balls.moveEm();
+        user.draw(graphToBack);
+        balls.expand(user, timer);
+        
+        for(int i = 0; i < balls.getSize(); i++)
+            expanded.add(balls.getBallE(i));
+        
+        for(ExpandedBall i : expanded){
+            i.draw(graphToBack);
+            if(timer - i.getTime() > 50)
+                i.recede(graphToBack);
+        }
+
+        balls.toString();
+        timer++;
         twoDGraph.drawImage(back, null, 0, 0);
     }
 
     public void mouseClicked(MouseEvent e) {
         System.out.println(e.getX() + " " + e.getY());
-        user = new ExpandedBall(e.getX(), e.getY(), 10, 40);
+        user = new ExpandedBall(e.getX(), e.getY(), 10, 60, timer);
     }
 
     public void mouseEntered(MouseEvent e) {
