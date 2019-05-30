@@ -5,13 +5,14 @@
  */
 package chainreaction;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 /**
  *
  * @author ceribellig8098
  */
-public class ExpandedBall{
+public class ExpandedBall {
 
     private int x;
     private int y;
@@ -28,38 +29,48 @@ public class ExpandedBall{
         step = 0;
         t = time;
     }
-    public int getY(){
+
+    public int getY() {
         return y;
     }
-    public int getX(){
+
+    public int getX() {
         return x;
     }
-    public int getRadius(){
+
+    public int getRadius() {
         return r2;
     }
-    public int getStep(){
+
+    public int getStep() {
         return step;
     }
-    public int getTime(){
+
+    public int getTime() {
         return t;
     }
-    public void draw(Graphics window){
-        if(step < 10){
-            window.fillOval(x, y, r1 + ((r2-r1)/(10-step)), r1 + ((r2-r1)/(10-step)));
+
+    public void draw(Graphics window) {
+        if (step < 10) {
+            window.drawOval(x, y, r1 + ((r2 - r1) / (10 - step)), r1 + ((r2 - r1) / (10 - step)));
             step++;
-        }else{
-            window.fillOval(x, y, r2, r2);
+        } else {
+            window.drawOval(x, y, r2, r2);
         }
     }
-    public void recede(Graphics window){
-        if(step > 0){
-            window.fillOval(x, y, r2 - (r2/(10-step)), r2 - (r2/(10-step)));
+
+    public void recede(Graphics window) {
+        if (step > 0) {
+            window.setColor(Color.WHITE);
+            window.drawOval(x, y, r2 - (r2 / (11 - step)), r2 - (r2 / (11 - step)));
             step--;
-        }else{
+            window.setColor(Color.RED);
+            window.drawOval(x, y, r2 - (r2 / (11 - step)), r2 - (r2 / (11 - step)));
+
+        } else {
             window.fillOval(x, y, 0, 0);
         }
-            
+
     }
-    
 
 }
