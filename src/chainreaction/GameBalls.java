@@ -18,6 +18,7 @@ public class GameBalls {
 
     private static final int WIDTH = 800;
     private static final int HEIGHT = 600;
+    private int score;
     private ArrayList<MovingBalls> balls;
     private ArrayList<ExpandedBall> ballE;
 
@@ -28,6 +29,7 @@ public class GameBalls {
         int rY = 0;
         int rXS = 0;
         int rYS = 0;
+        score = 0;
         for (int i = 0; i < size; i++) {
             rX = (int) (Math.random() * 760);
             rY = (int) (Math.random() * 540);
@@ -71,18 +73,24 @@ public class GameBalls {
             i.draw(window);
         }
     }
+    public int getScore(){
+        return score;
+    }
+    
 
     public void expand(ExpandedBall b, int time, ArrayList<ExpandedBall> y) {
         for (int a = 0; a < balls.size(); a++) {
             if ((balls.get(a).getY() <= b.getY() + b.getRadius()) && (balls.get(a).getY() >= b.getY()) && (balls.get(a).getX() <= b.getX() + b.getRadius()) && (balls.get(a).getX() >= b.getX())) {
                 ballE.add(new ExpandedBall(balls.get(a).getX(), balls.get(a).getY(), 15, 60, time));
                 balls.remove(a);
+                score++;
             }else{
             for (ExpandedBall i : y) {
                 if (i.getStep() > 0) {
                     if ((balls.get(a).getY() <= i.getY() + i.getRadius()) && (balls.get(a).getY() >= i.getY()) && (balls.get(a).getX() <= i.getX() + i.getRadius()) && (balls.get(a).getX() >= i.getX())) {
                         ballE.add(new ExpandedBall(balls.get(a).getX(), balls.get(a).getY(), 15, 60, time));
                         balls.remove(a);
+                        score++;
                     }
                 }
             }}

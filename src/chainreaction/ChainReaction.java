@@ -6,6 +6,7 @@
 package chainreaction;
 
 import java.awt.Component;
+import java.io.IOException;
 import javax.swing.JFrame;
 
 /**
@@ -16,13 +17,15 @@ public class ChainReaction extends JFrame{
 
     private static final int WIDTH = 800;
 	private static final int HEIGHT = 600;
+        public static  boolean start = false;
+        public static String name = "";
 
-	public ChainReaction()
+	public ChainReaction() throws IOException
 	{
 		super("Chain Reaction");
 		setSize(WIDTH,HEIGHT);
-
-		Game game = new Game();
+                
+		Game game = new Game(name);
 		((Component)game).setFocusable(true);
 
 		getContentPane().add(game);
@@ -30,8 +33,14 @@ public class ChainReaction extends JFrame{
 		setVisible(true);
 	}
 
-	public static void main( String args[] )
+    /**
+     *
+     * @param args
+     */
+    public static void main( String args[] ) throws IOException
 	{
+            Background.main(args);
+            while(!start){System.out.print("");}
 		ChainReaction run = new ChainReaction();
 	}
     

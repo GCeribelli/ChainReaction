@@ -20,6 +20,7 @@ public class ExpandedBall {
     private int r2;
     private int step;
     private int t;
+    private boolean done = false;
 
     public ExpandedBall(int X, int Y, int radius1, int radius2, int time) {
         x = X;
@@ -49,6 +50,9 @@ public class ExpandedBall {
     public int getTime() {
         return t;
     }
+    public boolean getDone(){
+        return done;
+    }
 
     public void draw(Graphics window) {
         if (step < 10) {
@@ -69,6 +73,8 @@ public class ExpandedBall {
 
         } else {
             window.fillOval(x, y, 0, 0);
+            if(t > 400)
+                done = true;
         }
 
     }
